@@ -1,7 +1,7 @@
 import { ReactNode, useContext } from 'react';
 
 import { AbilityContext } from './Can';
-import { NavGroup, NavLink } from '@/pages/layouts/types';
+import { NavGroup, NavLink } from '@/layouts/types';
 
 interface Props {
   navGroup?: NavGroup;

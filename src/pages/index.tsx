@@ -5,8 +5,8 @@ import styles from '@/styles/Home.module.css';
 import { useRouter } from 'next/router';
 import { ADMIN, GUEST } from '@/constants/pathNames';
 import { ReactNode, useContext } from 'react';
-import { AuthContext } from './context/AuthContext';
-import BlankLayout from './layouts/BlankLayout';
+import { AuthContext } from '../context/AuthContext';
+import BlankLayout from '../layouts/BlankLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
