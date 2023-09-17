@@ -42,9 +42,13 @@ export default function App(props: ExtendedAppProps) {
     const response = await fetch(
       'http://ec2-54-180-122-207.ap-northeast-2.compute.amazonaws.com:8080/hello'
     );
-    const jsonData = await response.json();
-    console.log(jsonData);
-    setData(jsonData.smsg);
+    try {
+      const jsonData = await response.json();
+      console.log(jsonData);
+      setData(jsonData.smsg);
+    } catch (e) {
+      return '';
+    }
   }
 
   useEffect(() => {
