@@ -20,16 +20,13 @@ type GuardProps = {
 
 export default function App(props: ExtendedAppProps) {
   const { Component, pageProps } = props;
-  const [data, setData] = useState('');
 
   const guestGuard = Component.guestGuard ?? false;
 
   const aclAbilities = Component.acl ?? defaultACLObj;
 
-  const getLayout =
-    Component.getLayout ?? ((page) => <UserLayout>{page}</UserLayout>);
+  const getLayout = Component.getLayout ?? ((page) => <UserLayout>{page}</UserLayout>);
 
-  /* guestGuard는  */
   const Guard = ({ children, guestGuard }: GuardProps) => {
     if (guestGuard) {
       return <GuestGuard>{children}</GuestGuard>;
@@ -38,28 +35,10 @@ export default function App(props: ExtendedAppProps) {
     }
   };
 
-  async function logJSONData() {
-    const response = await fetch(
-      'http://amazonaws.com:8080/hello'
-    );
-    try {
-      const jsonData = await response.json();
-      console.log(jsonData);
-      setData(jsonData.smsg);
-    } catch (e) {
-      return '';
-    }
-  }
-
-  useEffect(() => {
-    logJSONData();
-  }, []);
-
   return (
     <AuthProvider>
       <Guard guestGuard={guestGuard}>
         <AclGuard aclAbilities={aclAbilities} guestGuard={guestGuard}>
-          <h1>{data ?? ''}</h1>
           {getLayout(<Component {...pageProps} />)}
         </AclGuard>
       </Guard>
