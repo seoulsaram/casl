@@ -40,7 +40,7 @@ export default function App(props: ExtendedAppProps) {
 
   async function logJSONData() {
     const response = await fetch(
-      'http://ec2-54-180-122-207.ap-northeast-2.compute.amazonaws.com:8080/hello'
+      'http://amazonaws.com:8080/hello'
     );
     try {
       const jsonData = await response.json();
