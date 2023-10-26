@@ -28,8 +28,20 @@ const AuthProvider = ({ children }: Props) => {
   // ** Hooks
   const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const user = window.sessionStorage.getItem('user') as UserType;
+      setPermissionByUserType(user);
+    }
+  }, []);
+
   const login = (user: UserType) => {
     setUser(user);
+    window.sessionStorage.setItem('user', user);
+    setPermissionByUserType(user);
+  };
+
+  const setPermissionByUserType = (user: UserType) => {
     if (user === 'admin') {
       setPermission([
         { subject: 'home', can: 'read' },
@@ -38,13 +50,22 @@ const AuthProvider = ({ children }: Props) => {
         { subject: 'admin', can: 'update' },
         { subject: 'admin', can: 'delete' },
       ]);
+    } else {
+      setPermission([
+        { subject: 'home', can: 'read' },
+        { subject: 'guest', can: 'create' },
+        { subject: 'guest', can: 'read' },
+        { subject: 'guest', can: 'update' },
+        { subject: 'guest', can: 'delete' },
+      ]);
     }
   };
 
   const logout = () => {
     setUser('guest');
+    window.sessionStorage.setItem('user', user);
     router.push('/');
-    setPermission([{ subject: 'home', can: 'read' }]);
+    setPermissionByUserType('guest');
   };
 
   const values = {

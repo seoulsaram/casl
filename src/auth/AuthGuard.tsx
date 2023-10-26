@@ -16,18 +16,6 @@ const AuthGuard = (props: AuthGuardProps) => {
   const { user } = useContext(AuthContext);
   const router = useRouter();
 
-  useEffect(
-    () => {
-      if (user !== 'admin') {
-        if (router.asPath !== '/') {
-          router.push('/');
-        }
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [router.route]
-  );
-
   return <>{children}</>;
 };
 

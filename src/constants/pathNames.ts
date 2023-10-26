@@ -3,5 +3,5 @@ export const ADMIN = {
 };
 
 export const GUEST = {
-  HOME: '/guest',
+  HOME: '/guest/menu',
 };

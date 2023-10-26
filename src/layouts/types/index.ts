@@ -3,6 +3,7 @@ export type NavGroup = {
   action?: string;
   subject?: string;
   badgeContent?: string;
+  path?: string;
   children?: (NavGroup | NavLink)[];
 };
 

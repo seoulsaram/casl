@@ -10,6 +10,7 @@ import { AbilityContext } from '../components/acl/Can';
 // ** Configs
 import { ACLObj, AppAbility, buildAbilityFor } from '../configs/acl';
 import { AuthContext } from '../context/AuthContext';
+import styled from 'styled-components';
 
 interface AclGuardProps {
   children: ReactNode;
@@ -41,7 +42,15 @@ const AclGuard = (props: AclGuardProps) => {
     return <AbilityContext.Provider value={ability}>{children}</AbilityContext.Provider>;
   }
 
-  return <div>{!permission.length || !ability ? <div>loading...</div> : <div>You are not authorized!</div>}</div>;
+  return <GuardPageContainer>{!permission.length || !ability ? <h2>loading...</h2> : <h2>You are not authorized!</h2>}</GuardPageContainer>;
 };
 
 export default AclGuard;
+
+const GuardPageContainer = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

@@ -7,6 +7,8 @@ import { ADMIN, GUEST } from '@/constants/pathNames';
 import { ReactNode, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import BlankLayout from '../layouts/BlankLayout';
+import { Button } from '@mui/material';
+import styled from 'styled-components';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,22 +26,28 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <h1>CASL demo</h1>
 
-        <button
-          onClick={() => {
-            login('admin');
-            router.push(ADMIN.HOME);
-          }}
-        >
-          Admin login
-        </button>
-        <button
-          onClick={() => {
-            login('guest');
-            router.push(GUEST.HOME);
-          }}
-        >
-          Enter as Guest
-        </button>
+        <ButtonContainer>
+          <Button
+            variant='contained'
+            onClick={() => {
+              login('admin');
+              router.push(ADMIN.HOME);
+            }}
+          >
+            Admin login
+          </Button>
+
+          <Button
+            variant='contained'
+            color='secondary'
+            onClick={() => {
+              login('guest');
+              router.push(GUEST.HOME);
+            }}
+          >
+            Enter as Guest
+          </Button>
+        </ButtonContainer>
       </main>
     </>
   );
@@ -48,3 +56,11 @@ export default function Home() {
 Home.getLayout = (page: ReactNode) => <BlankLayout>{page}</BlankLayout>;
 
 Home.guestGuard = true;
+
+const ButtonContainer = styled.div`
+  margin: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+`;
